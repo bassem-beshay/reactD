@@ -24,14 +24,18 @@ function Products() {
         fetchProducts();
     }, []);
 
+    const handleAddToProduct = (productId) => {
+        // Handle adding product to cart or whatever functionality you need
+        console.log(`Product ${productId} added`);
+        alert(`Product ${productId} added to cart!`);
+    };
+
     if (loading) return <p>Loading products...</p>;
     if (error) return <p style={{ color: "red" }}>{error}</p>;
 
     return (
         <div style={{ padding: "20px", textAlign: "center" }}>
             <h2>Products List</h2>
-
-
 
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "20px" }}>
                 {products.length > 0 ? (
@@ -46,12 +50,27 @@ function Products() {
                         }}>
                             <h3>{product.Product_name}</h3>
                             <img 
-                                src={product.Img_url || "https://via.placeholder.com/150"} 
+                                src={product.Img_url || "https://via.placeholder.com/150" } 
                                 alt={product.Product_name} 
-                                style={{ width: "100%", borderRadius: "10px" }} 
+                                style={{ width: "100%" , height : "200px", borderRadius: "10px" }} 
                             />
                             <p><strong>Price:</strong> ${product.Price}</p>
                             <p style={{ fontSize: "14px", color: "#666" }}>{product.Description}</p>
+                            <button 
+                                onClick={() => handleAddToProduct(product.product_id)}
+                                style={{
+                                    backgroundColor: "#ff00ff", // Fuchsia color
+                                    color: "white",
+                                    border: "none",
+                                    padding: "8px 16px",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                    fontWeight: "bold",
+                                    marginTop: "10px"
+                                }}
+                            >
+                                Add to cart
+                            </button>
                         </div>
                     ))
                 ) : (
